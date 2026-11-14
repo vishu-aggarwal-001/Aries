@@ -1,0 +1,14 @@
+services:
+  db:
+    image: postgres:16
+    environment: { POSTGRES_PASSWORD: aries, POSTGRES_DB: aries }
+    volumes: [pgdata:/var/lib/postgresql/data]
+  app:
+    build: .
+    ports: ["8787:8787"]
+    env_file: .env
+    environment:
+      DATABASE_URL: postgres://postgres:aries@db:5432/aries
+      PGSSL: "off"
+    depends_on: [db]
+volumes: { pgdata: {} }

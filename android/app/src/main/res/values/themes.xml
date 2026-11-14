@@ -1,0 +1,9 @@
+<resources>
+    <color name="bg">#0D0F1E</color><color name="molten">#F3B53F</color><color name="text">#ECE9F7</color><color name="muted">#8D90B3</color>
+    <style name="Theme.Aries" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/bg</item>
+        <item name="android:navigationBarColor">@color/bg</item>
+        <item name="android:colorAccent">@color/molten</item>
+    </style>
+</resources>
