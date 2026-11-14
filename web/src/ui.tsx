@@ -6,7 +6,7 @@ export function Avatar({ a, size = 36, live }: { a?: any; size?: number; live?: 
   const letter = a?.name ? a.name[0].toUpperCase() : "You"[0];
   return (
     <div className={"avatar" + (live ? " live" : "")} aria-hidden
-      style={{ width: size, height: size, fontSize: size * 0.46, background: a ? `radial-gradient(circle at 35% 30%, hsl(${h} 85% 82%), hsl(${h} 60% 62%))` : "var(--deep2)", color: a ? "#0d0f1e" : "var(--dim)" }}>
+      style={{ width: size, height: size, fontSize: size * 0.46, background: a ? `radial-gradient(circle at 35% 30%, hsl(${h} 85% 82%), hsl(${h} 60% 62%))` : "var(--deep2)", color: a ? "#0b1a2e" : "var(--dim)" }}>
       {a ? letter : "·"}
     </div>
   );
@@ -53,11 +53,11 @@ export function Sky({ agents, live = [], waiting = [], onPick, height = 58, labe
   return (
     <svg viewBox={`0 0 100 ${height}`} role="img" aria-label="Your crew as a constellation">
       <defs>
-        <radialGradient id="halo"><stop offset="0" stopColor="#ece9f7" stopOpacity=".5" /><stop offset="1" stopColor="#ece9f7" stopOpacity="0" /></radialGradient>
-        <radialGradient id="haloIce"><stop offset="0" stopColor="#8fb4ff" stopOpacity=".9" /><stop offset="1" stopColor="#8fb4ff" stopOpacity="0" /></radialGradient>
-        <radialGradient id="haloGold"><stop offset="0" stopColor="#f3b53f" stopOpacity=".95" /><stop offset="1" stopColor="#f3b53f" stopOpacity="0" /></radialGradient>
+        <radialGradient id="halo"><stop offset="0" stopColor="#7fd8ff" stopOpacity=".55" /><stop offset="1" stopColor="#7fd8ff" stopOpacity="0" /></radialGradient>
+        <radialGradient id="haloIce"><stop offset="0" stopColor="#00c2ff" stopOpacity=".9" /><stop offset="1" stopColor="#00c2ff" stopOpacity="0" /></radialGradient>
+        <radialGradient id="haloGold"><stop offset="0" stopColor="#f0a020" stopOpacity=".95" /><stop offset="1" stopColor="#f0a020" stopOpacity="0" /></radialGradient>
       </defs>
-      {DUST.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#ece9f7" opacity={0.15 + (i % 5) / 14} />)}
+      {DUST.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#3a8fd8" opacity={0.12 + (i % 5) / 18} />)}
       {order.filter(a => pos.has(a.reportsTo)).map(a => {
         const [x1, y1] = pos.get(a.reportsTo)!; const [x2, y2] = pos.get(a.id)!;
         return <line key={"l" + a.id} className={"sky-line" + (live.includes(a.id) || live.includes(a.reportsTo) ? " live" : "")} x1={x1} y1={y1} x2={x2} y2={y2} />;

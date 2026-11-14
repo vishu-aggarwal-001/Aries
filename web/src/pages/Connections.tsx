@@ -3,7 +3,7 @@ import { act, ago, req, useCatalog } from "../api.ts";
 import { Empty, Field, Loading, Modal, Pill, Section, useBusy } from "../ui.tsx";
 
 const TILE: any = { shopify: ["S", "#95bf47"], woocommerce: ["W", "#9b6fd6"], stripe: ["S", "#7a73ff"], shippo: ["Sh", "#3fb6e8"], email: ["@", "#f3b53f"], webhook: ["Z", "#ff7a4d"], mcp: ["M", "#8fb4ff"], api: ["{ }", "#c3a6ff"] };
-const Tile = ({ type }: { type: string }) => { const [t, c] = TILE[type] ?? ["?", "#8d90b3"]; return <span aria-hidden style={{ width: 38, height: 38, borderRadius: 11, display: "grid", placeItems: "center", flex: "none", fontWeight: 800, fontStretch: "80%", fontSize: 15, color: c, background: `color-mix(in srgb, ${c} 14%, #0d0f1e)`, border: `1px solid color-mix(in srgb, ${c} 40%, transparent)` }}>{t}</span>; };
+const Tile = ({ type }: { type: string }) => { const [t, c] = TILE[type] ?? ["?", "#8d90b3"]; return <span aria-hidden style={{ width: 38, height: 38, borderRadius: 11, display: "grid", placeItems: "center", flex: "none", fontWeight: 800, fontStretch: "80%", fontSize: 15, color: c, background: `color-mix(in srgb, ${c} 14%, #ffffff)`, border: `1px solid color-mix(in srgb, ${c} 40%, transparent)` }}>{t}</span>; };
 
 export function Connections({ b }: { b: any }) {
   const s = b.state; const cat = useCatalog(); const [setup, setSetup] = useState<any>(null); const [busy, run] = useBusy();
