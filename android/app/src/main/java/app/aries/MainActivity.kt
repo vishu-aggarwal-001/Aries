@@ -39,7 +39,7 @@ class MainActivity : Activity() {
     @SuppressLint("SetJavaScriptEnabled")
     private fun showWeb(state: Bundle?) {
         web = WebView(this).apply {
-            setBackgroundColor(Color.parseColor("#0D0F1E"))
+            setBackgroundColor(Color.parseColor("#EDF3FA"))
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
             settings.allowFileAccess = false
@@ -51,7 +51,7 @@ class MainActivity : Activity() {
         }
         CookieManager.getInstance().setAcceptCookie(true)
         swipe = SwipeRefreshLayout(this).apply {
-            setColorSchemeColors(Color.parseColor("#F3B53F")); setProgressBackgroundColorSchemeColor(Color.parseColor("#1E2342"))
+            setColorSchemeColors(Color.parseColor("#00A8E8")); setProgressBackgroundColorSchemeColor(Color.parseColor("#FFFFFF"))
             addView(web); setOnRefreshListener { web.reload() }
             setOnChildScrollUpCallback { _, _ -> web.scrollY > 0 }
         }
@@ -115,11 +115,11 @@ class MainActivity : Activity() {
     }
 
     private fun offlinePage(why: String) = """
-        <html><body style="background:#0D0F1E;color:#ECE9F7;font-family:sans-serif;padding:32px;display:flex;flex-direction:column;justify-content:center;min-height:80vh">
-        <div style="color:#F3B53F;letter-spacing:.2em;font-weight:800;font-size:12px">ARIES</div>
-        <h1 style="font-family:serif">Can't reach your crew</h1><p style="color:#8D90B3">${why.replace("<", "&lt;")}</p>
-        <p><a href="$base/" style="display:inline-block;background:#F3B53F;color:#241703;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700">Try again</a></p>
-        ${if (BuildConfig.SERVER_URL.isBlank()) "<p><a href=\"aries://server\" style=\"color:#8FB4FF\">Change server address</a></p>" else ""}
+        <html><body style="background:#EDF3FA;color:#0B1A2E;font-family:sans-serif;padding:32px;display:flex;flex-direction:column;justify-content:center;min-height:80vh">
+        <div style="color:#00A8E8;letter-spacing:.2em;font-weight:800;font-size:12px">ARIES</div>
+        <h1 style="font-family:serif">Can't reach your crew</h1><p style="color:#566A83">${why.replace("<", "&lt;")}</p>
+        <p><a href="$base/" style="display:inline-block;background:linear-gradient(135deg,#00C2FF,#5B6CFF);color:#ffffff;padding:12px 20px;border-radius:12px;text-decoration:none;font-weight:700">Try again</a></p>
+        ${if (BuildConfig.SERVER_URL.isBlank()) "<p><a href=\"aries://server\" style=\"color:#00A8E8\">Change server address</a></p>" else ""}
         </body></html>""".trimIndent()
 
     /** Only shown when the app wasn't built with a server URL (developer and self-hosted builds). */
@@ -127,12 +127,12 @@ class MainActivity : Activity() {
         val pad = (20 * resources.displayMetrics.density).toInt()
         val input = EditText(this).apply {
             hint = "https://app.yourdomain.com"; setText(prefs.getString("server", "")); inputType = InputType.TYPE_TEXT_VARIATION_URI
-            setTextColor(Color.parseColor("#ECE9F7")); setHintTextColor(Color.parseColor("#8D90B3"))
+            setTextColor(Color.parseColor("#0B1A2E")); setHintTextColor(Color.parseColor("#8B9CB1"))
         }
         val col = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER_VERTICAL; setPadding(pad, pad, pad, pad); setBackgroundColor(Color.parseColor("#0D0F1E"))
-            addView(TextView(context).apply { text = "ARIES"; setTextColor(Color.parseColor("#F3B53F")); letterSpacing = 0.2f; textSize = 12f })
-            addView(TextView(context).apply { text = "Where is your Aries server?"; setTextColor(Color.parseColor("#ECE9F7")); textSize = 26f; setPadding(0, pad / 2, 0, pad / 2) })
+            orientation = LinearLayout.VERTICAL; gravity = Gravity.CENTER_VERTICAL; setPadding(pad, pad, pad, pad); setBackgroundColor(Color.parseColor("#EDF3FA"))
+            addView(TextView(context).apply { text = "ARIES"; setTextColor(Color.parseColor("#00A8E8")); letterSpacing = 0.2f; textSize = 12f })
+            addView(TextView(context).apply { text = "Where is your Aries server?"; setTextColor(Color.parseColor("#0B1A2E")); textSize = 26f; setPadding(0, pad / 2, 0, pad / 2) })
             addView(input, LinearLayout.LayoutParams(MATCH_PARENT, WRAP_CONTENT))
             addView(Button(context).apply {
                 text = "Continue"
