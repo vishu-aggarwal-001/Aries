@@ -1,0 +1,42 @@
+---
+description: Aries: What Aries is, repo layout, architecture, core ideas (business JSON state, secrets, heartbeats, the gate, approvals, models)
+alwaysApply: false
+---
+
+# Aries: overview and architecture
+
+Aries (github.com/vishu-aggarwal-001/Aries, public) is an AI operations crew for any business, built by Vishu Aggarwal. Owners describe a goal, connect the apps the business runs on, and a team of Claude agents (CEO, operations, support, marketing, merchandising, and more) does the work: ships orders, answers customers, updates listings, writes plans and reports. Anything that spends money, messages a customer or changes the store follows the owner's rules (do it / ask me / never, with $ limits). It's sold to businesses as a subscription: Aries pays for the AI, the business pays a monthly plan.
+
+Inspired by the open-source Paperclip project (MIT, github.com/paperclipai/paperclip).
+
+## Repo layout
+
+| Path | What it is |
+|---|---|
+| `server/` | Node 22 + TypeScript (run with `tsx`), Hono HTTP server. API, the 24/7 agent engine, connectors, billing. Postgres, or embedded PGlite for dev. |
+| `server/src/index.ts` | Boots DB, repo, connections, engine, API; serves the built web app from `web/dist`. |
+| `server/src/api.ts` | All HTTP routes (see 07-api-reference). |
+| `server/src/model.ts` | Data types (State, Agent, Task, Order, Policy…) and pure functions that change a business. |
+| `server/src/db.ts` | Postgres/PGlite access, `Repo` with optimistic locking, encrypted secrets table. |
+| `server/src/auth.ts` | Signup/login, bcrypt passwords, JWT sessions (jose). |
+| `server/src/plans.ts` | Subscription plans and billing state. |
+| `server/src/templates.ts` | Business templates and their default crews; `foundState()` creates a new business. |
+| `server/src/engine/` | `engine.ts` (scheduler + heartbeat loop), `claude.ts` (Messages API client, prices), `prompts.ts` (system + wake prompts), `tools.ts` (internal agent tools). |
+| `server/src/connectors/` | `base.ts` (ConnectorDef, safe HTTP, SSRF guard), `index.ts` (catalog, tool binding, the gate), `shopify.ts`, `commerce.ts` (WooCommerce, Stripe, Shippo), `universal.ts` (Email/Resend, webhook, MCP, any REST API). |
+| `server/scripts/demo.ts` | Local demo with a simulated store and scripted agents. |
+| `server/test/aries.test.ts` | End-to-end tests (vitest). |
+| `web/` | React 19 + Vite + react-router, mobile-first, installable PWA with a share target. |
+| `android/` | Kotlin WebView shell around the web app, with "Send to Aries" in the share sheet. |
+| `Dockerfile`, `docker-compose.yml` | One container serves API + engine + web; compose adds Postgres 16. |
+| `LAUNCH.md` | Launch checklist (see 10-launch). |
+| `.env.example` | All environment variables (see 02-run-and-deploy). |
+
+## Core ideas
+
+- **Business = one JSON document** (`State`) per business, changed only through pure functions in `model.ts`, saved with optimistic locking (`version`). Holds agents, tasks, comments, docs, approvals, routines, connections (no secrets), orders, products, actions (ledger), policies, settings.
+- **Secrets live apart**: connection credentials are in a separate table, AES-256-GCM encrypted with `SECRET_KEY`. They never reach the browser or the agents.
+- **Agents** wake on a schedule (heartbeatMin, default 60 for the CEO, 45 for reports) or when something happens (new order, comment, approval decided, subtask done). Each check-in is a Claude tool-use loop of up to 16 turns.
+- **The gate** sits between agents and the outside world. Read-only tools run immediately. Writes are recorded in the ledger (`actions`) and either run (auto, under the $ limit), wait in the owner's Inbox, or are blocked.
+- **Approvals** have types: `hire`, `review`, `question`, `budget`, `action`.
+- **Billing**: each plan has a monthly AI credit; usage is metered per business and the crew stops at the cap.
+- **Models**: `claude-haiku-5-5` (default for most agents), `claude-sonnet-5-5` (CEO, Ops, CTO, Writer), `claude-opus-5-5` available.
