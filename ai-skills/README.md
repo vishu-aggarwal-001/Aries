@@ -17,6 +17,6 @@ Download the zip for the AI you use. Each one has a `SETUP.md` inside with the s
 | Cursor | [aries-for-cursor.zip](aries-for-cursor.zip) |
 | Everything | [aries-skill-library-ALL-AIs.zip](aries-skill-library-ALL-AIs.zip) |
 
-The coding-tool versions are already installed in this repo (`CLAUDE.md`, `.claude/skills/`, `AGENTS.md`, `.agents/skills/`, `.github/copilot-instructions.md`, `.cursor/rules/`, `docs/ai/`), so Claude Code, Codex, Copilot and Cursor pick them up when you open the repo.
+For coding tools (Claude Code, Codex, GitHub Copilot, Cursor), unzip that tool's zip into the root of your Aries checkout on your own computer when you want it. Nothing is installed in the repo itself, so the AI files stay in this folder.
 
 The library covers: what Aries is, running and deploying it, the owner's guide, every crew agent's job, the agent engine, connectors, the API, testing, the web and Android apps, and launching/releasing.
