@@ -53,3 +53,7 @@ cd server && npm test     # end-to-end: accounts, tenancy, Shopify sync, ship-wi
 cd android && ./gradlew assembleRelease -PariesUrl=https://app.yourdomain.com
 ```
 Without `-PariesUrl` the app asks for a server address on first launch (handy for testing).
+
+## AI skill library
+
+Skill files that teach any AI (Claude, ChatGPT, Gemini, Grok, Perplexity, Mistral, Copilot, Cursor, Codex and more) how to run, use, build and release Aries: see [`ai-skills/`](ai-skills/README.md).

@@ -1,0 +1,49 @@
+---
+description: Aries: Using Aries as a business owner: templates and crews, screens, rules and defaults, settings, members
+alwaysApply: false
+---
+
+# Using Aries as a business owner
+
+## Getting started
+1. Sign up, then **New business**: name, goal, template, monthly agent budget, optional notes.
+2. Templates and their crews:
+   | Template | Top agent | Team | Suggested apps |
+   |---|---|---|---|
+   | Online store | Ada, CEO | Otto (Ops), June (Support), Max (Marketing), Mira (Merchandiser) | Shopify, WooCommerce, Shippo, Email, Stripe |
+   | Maker / handmade | Ada, Studio Manager | Otto, June, Max | Shopify, Shippo, Email, Webhook |
+   | Services business | Ada, General Manager | Sol (Sales), June (Client Success), Otto (Operations & Billing), Max | Stripe, Email, MCP, Webhook |
+   | Restaurant, café or shop | Ada, General Manager | Otto (Operations & Inventory), June (Guest Relations), Max | Email, Webhook, MCP, API |
+   | Software / SaaS | Ada, CEO | Linus (CTO), June (Support Lead), Max (Growth Lead) | Stripe, Email, MCP, API |
+   | Creator / media | Ada, Editor-in-Chief | Sage (Researcher), Quill (Writer), Echo (Social Lead) | Stripe, Email, Webhook, MCP |
+   | Start from scratch | Ada, CEO | none: Ada proposes hires | MCP, API, Webhook |
+3. The CEO gets a first task automatically: write an operating plan, check connections, create the first team tasks, submit the plan for review. A **Daily brief** routine runs every 24 h.
+4. Budget split: CEO gets 30% of the monthly agent budget, each team member 15%.
+5. Turn on **Run the crew** (switch in the header).
+
+## Screens (web and Android)
+- **Pulse**: overview of what the crew is doing, live agents, money and orders.
+- **Work**: tasks (status, priority, assignee, subtasks, comments, documents). Comment with @Name to wake an agent.
+- **Store**: orders and products from connected stores; manual orders/products can be added.
+- **Crew**: agents. Each has name, title, role, model, instructions, budget, heartbeat interval, pause, and **Run now**.
+- **Inbox**: approvals waiting on the owner: hires, reviews, questions, budget, and real-world actions. Badge shows the count.
+- **More** → Connections, Rules, Ledger (every real-world action and its result), Deliverables (documents), Plan & billing, team members, export, delete account.
+- **Share to Aries**: from Android's share sheet or the PWA share target, send a customer message/text into Aries; it's routed to Support.
+
+## Rules (the owner's control)
+Each category is set to **Do it** (auto, optionally with a $ limit), **Ask me** or **Never**:
+| Category | Covers | Default |
+|---|---|---|
+| Message customers | Emails and replies sent to customers | Ask me |
+| Spend money | Shipping labels and other purchases | Ask me |
+| Refunds | Money sent back to customers | Ask me |
+| Change the store | Prices, product copy, fulfilling orders | Ask me |
+| Payment links | Links customers can pay with | Do it, up to $500 |
+| Other apps | Writes through MCP servers, APIs and webhooks | Ask me |
+Recommended: start conservative, loosen once you trust the crew (e.g. auto-buy labels under $15).
+
+## Settings
+Low-stock threshold (default 3), auto-create tasks from new orders (on), monthly agent budget (default $50).
+
+## Team members
+Owners can invite members (`/members`); members can use the business but only the owner manages billing and deletion.
